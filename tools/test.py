@@ -38,16 +38,16 @@ def main():
     cfg.merge_from_file(args.config)
 
     cur_dir = os.path.dirname(os.path.realpath(__file__))
-    dataset_root = os.path.join(cur_dir, '../testing_dataset', args.dataset)
+    dataset_root = os.path.join(cur_dir, 'D:\\Phd\\dataset', args.dataset)
 
     # create model
-    model = ModelBuilder()
+    model = ModelBuilder()    # 加载网络参数，包括层数、每层的卷积通道数等等
 
     # load model
-    model = load_pretrain(model, args.snapshot).cuda().eval()
+    model = load_pretrain(model, args.snapshot).cuda().eval()  #从model.pth加载预训练的参数到model中
 
     # build tracker
-    tracker = build_tracker(model)
+    tracker = build_tracker(model)  #加载load的网络，搭建tracker
 
     # create dataset
     dataset = DatasetFactory.create_dataset(name=args.dataset,
@@ -74,14 +74,14 @@ def main():
                        gt_bbox[0]+gt_bbox[2]-1, gt_bbox[1]+gt_bbox[3]-1,
                        gt_bbox[0]+gt_bbox[2]-1, gt_bbox[1]]
                 tic = cv2.getTickCount()
-                if idx == frame_counter:
+                if idx == frame_counter:   # 第一帧图像载入
                     cx, cy, w, h = get_axis_aligned_bbox(np.array(gt_bbox))
                     gt_bbox_ = [cx-(w-1)/2, cy-(h-1)/2, w, h]
-                    tracker.init(img, gt_bbox_)
+                    tracker.init(img, gt_bbox_)   #初始化tracker
                     pred_bbox = gt_bbox_
                     pred_bboxes.append(1)
-                elif idx > frame_counter:
-                    outputs = tracker.track(img)
+                elif idx > frame_counter:  # 后续帧载入
+                    outputs = tracker.track(img)  #调用tracker,计算新一帧跟踪框的位置
                     pred_bbox = outputs['bbox']
                     if cfg.MASK.MASK:
                         pred_bbox = outputs['polygon']

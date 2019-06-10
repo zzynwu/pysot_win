@@ -1,0 +1,33 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "pythonPath": "C:\\Program Files\\Python37\\Python.exe",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "D:\\zzy\\GitHub\\pysot\\experiments\\siamrpn_mobilev2_l234_dwxcorr",
+            // "args":[
+            //     "--snapshot","D:\\zzy\\GitHub\\pysot\\experiments\\siamrpn_mobilev2_l234_dwxcorr\\model.pth",
+            //     "--config","D:\\zzy\\GitHub\\pysot\\experiments\\siamrpn_mobilev2_l234_dwxcorr\\config.yaml",
+            //     "--video_name","D:\\Phd\\dataset\\OTB100\\Walking2\\img"
+            // ]
+            "args":[
+                "--tracker_path","D:\\zzy\\GitHub\\pysot\\experiments\\siamrpn_mobilev2_l234_dwxcorr\\results",
+                "--dataset","OTB100",
+                "--num","1",
+                "--tracker_prefix","model"
+            ]
+            //     "--snapshot","D:\\zzy\\GitHub\\pysot\\experiments\\siamrpn_mobilev2_l234_dwxcorr\\model.pth",
+            //     "--config","D:\\zzy\\GitHub\\pysot\\experiments\\siamrpn_mobilev2_l234_dwxcorr\\config.yaml",
+            //     "--dataset","OTB100"
+            // ]
+        }
+    ],
+}
